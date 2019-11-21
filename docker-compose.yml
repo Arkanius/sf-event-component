@@ -1,0 +1,42 @@
+version: '2'
+
+services:
+  nginx:
+    image: vtrgomes/nginx-alpine:latest
+    ports:
+      - 80:80
+    volumes_from:
+      - app
+    networks:
+      - app-network
+    links:
+      - app
+      - php
+
+  app:
+    command: "true"
+    image: alpine:3.4
+    volumes:
+      - ./:/var/www/app
+    networks:
+      - app-network
+
+  php:
+    image: vtrgomes/composer-alpine:7.3
+    user: app
+    expose:
+      - 9000
+    volumes:
+      - ./composer-cache:/composer/cache
+    volumes_from:
+      - app
+    networks:
+      - app-network
+
+volumes:
+  composer-cache:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge

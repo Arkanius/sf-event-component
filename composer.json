@@ -1,0 +1,12 @@
+{
+    "name": "root/app",
+    "authors": [
+        {
+            "name": "Victor Gomes",
+            "email": "vtr.gomes@hotmail.com"
+        }
+    ],
+    "require": {
+        "symfony/event-dispatcher": "^4.3"
+    }
+}
